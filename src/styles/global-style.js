@@ -5,6 +5,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     font-family: 'Asap', sans-serif;
     color: #14181B;
+    user-select: none;
   }
   html, body {
     width: 100%;
