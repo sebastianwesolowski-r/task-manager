@@ -11,3 +11,9 @@ export const logoutUser = token => api.post('user/logout', {}, {
         Authorization: `Bearer ${token}`
     }
 });
+
+export const getUserTasks = token => api.get('/tasks', {
+    headers: {
+        Authorization: `Bearer ${token}`
+    }
+});

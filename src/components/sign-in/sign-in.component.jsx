@@ -36,7 +36,7 @@ const SignIn = ({setSignMethod, signInStart}) => {
                 <FormInput type="text" name="email" value={email} placeholder="Email" onChange={handleChange} required/>
                 <div>
                     <FormInput type={passwordShown ? 'text' : 'password'} name="password" value={password} placeholder="Password" onChange={handleChange} required/>
-                    <i onClick={() => togglePasswordVisiblity()}>{passwordShown ? <PasswordVisible />: <PasswordNotVisible />}</i>
+                    <i onClick={() => togglePasswordVisiblity()}>{passwordShown ? <PasswordVisible /> : <PasswordNotVisible />}</i>
                 </div>
                 <CustomButton type="submit" buttonStyle={'sign-main'} style={{marginTop: '25px'}}>Login</CustomButton>
                 <CustomButton type="button" buttonStyle={'sign-secondary'} onClick={() => setSignMethod('signup')}>Sign Up</CustomButton>

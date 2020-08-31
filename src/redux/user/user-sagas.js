@@ -13,7 +13,7 @@ export function* signIn({payload: {email, password}}) {
     } catch (e) {
         yield put(signInFailure(e));
     }
-}
+};
 
 export function* signOut({payload}) {
     try {
@@ -22,7 +22,7 @@ export function* signOut({payload}) {
     } catch (e) {
         yield put(signOutFailure(e));
     }
-}
+};
 
 export function* signUp({payload: {email, password}}) {
     try {
@@ -31,20 +31,20 @@ export function* signUp({payload: {email, password}}) {
     } catch (e) {
         yield put(signUpFailure(e));
     }
-}
+};
 
 export function* onSignInStart() {
     yield takeLatest(UserActionTypes.SIGN_IN_START, signIn);
-}
+};
 
 export function* onSignOutStart() {
     yield takeLatest(UserActionTypes.SIGN_OUT_START, signOut);
-}
+};
 
 export function* onSignUpStart() {
     yield takeLatest(UserActionTypes.SIGN_UP_START, signUp);
-}
+};
 
 export function* userSagas() {
     yield all([call(onSignUpStart), call(onSignInStart), call(onSignOutStart)]);
-}
+};
