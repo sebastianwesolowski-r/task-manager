@@ -1,34 +1,52 @@
-import React, {useEffect} from 'react';
+import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
 
-import {HomePageContainer, TasksHeader} from './home-page.styles';
+import {ReactComponent as Plus} from '../../assets/plus.svg';
 
-import {getTasksStart} from '../../redux/tasks/tasks-actions';
-import {selectUserTasks} from '../../redux/tasks/tasks-selectors';
+import {HomePageContainer, TasksHeader, TasksContainer, AddTaskButton} from './home-page.styles';
 
-const HomePage = ({auth, userTasks, getTasksStart}) => {
+import TodayTask from '../../components/today-task/today-task.component';
+import AddTask from '../../components/add-task/add-task.component';
 
-    useEffect(() => {
-        getTasksStart(auth);
-    }, []);
-    console.log(userTasks);
+import {selectTodayTasks} from '../../redux/tasks/tasks-selectors';
+
+const HomePage = ({todayTasks}) => {
+
+    const [taskPopup, setTaskPopup] = useState(false);
+
+    const showTaskPopup = () => setTaskPopup(!taskPopup);
+
+    console.log(todayTasks);
     return (
-        <HomePageContainer>
-            <TasksHeader>
-                Today Tasks
-                <p>3 tasks | <span>1 done</span></p>
-            </TasksHeader>
-        </HomePageContainer>
+        <>
+            <HomePageContainer>
+                <TasksHeader>
+                    Today Tasks
+                    {
+                        todayTasks ? (
+                            <p>{todayTasks.length} Tasks | <span>{todayTasks.filter(task => task.completed === true).length} Done</span></p>
+                        ): (
+                            <p>0 tasks</p>
+                        )
+                    }
+                </TasksHeader>
+                <TasksContainer>
+                    {todayTasks.sort(({deadline: previousDeadline}, {deadline: currentDeadline}) => new Date(previousDeadline) - new Date(currentDeadline)).map(task => <TodayTask key={task._id} task={task} />)}
+                </TasksContainer>
+                <AddTaskButton onClick={() => showTaskPopup()}><Plus /></AddTaskButton>
+            </HomePageContainer>
+            {
+                taskPopup ? (
+                    <AddTask showTaskPopup={showTaskPopup} />
+                ) : null
+            }
+        </>
     );
 };
 
 const mapStateToProps = createStructuredSelector({
-    userTasks: selectUserTasks
+    todayTasks: selectTodayTasks
 });
 
-const mapDispatchToProps = dispatch => ({
-    getTasksStart: authToken => dispatch(getTasksStart(authToken))
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
+export default connect(mapStateToProps)(HomePage);

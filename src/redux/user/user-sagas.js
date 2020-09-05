@@ -3,12 +3,14 @@ import {takeLatest, put, all, call} from 'redux-saga/effects';
 import UserActionTypes from './user-types';
 
 import {signInSuccess, signInFailure, signOutSuccess, signOutFailure, signUpSuccess, signUpFailure} from './user-actions';
+import {getTasksStart} from '../tasks/tasks-actions';
 
-import {createUser, loginUser, logoutUser} from '../../api/api';
+import {callCreateUser, callLoginUser, callLogoutUser} from '../../api/api';
 
 export function* signIn({payload: {email, password}}) {
     try {
-        const userResponse = yield loginUser({email, password});
+        const userResponse = yield callLoginUser({email, password});
+        yield put(getTasksStart(userResponse.data.token));
         yield put(signInSuccess(userResponse.data));
     } catch (e) {
         yield put(signInFailure(e));
@@ -17,7 +19,7 @@ export function* signIn({payload: {email, password}}) {
 
 export function* signOut({payload}) {
     try {
-        yield logoutUser(payload);
+        yield callLogoutUser(payload);
         yield put(signOutSuccess());
     } catch (e) {
         yield put(signOutFailure(e));
@@ -26,7 +28,7 @@ export function* signOut({payload}) {
 
 export function* signUp({payload: {email, password}}) {
     try {
-        yield createUser({email, password});
+        yield callCreateUser({email, password});
         yield put(signUpSuccess());
     } catch (e) {
         yield put(signUpFailure(e));
