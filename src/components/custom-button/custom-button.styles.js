@@ -68,6 +68,22 @@ const taskAdd = css`
     }
 `;
 
+const settings = css`
+    width: auto;
+    height: 35px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    background-color: #D3D3D3;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    padding: 0 25px;
+    &:hover {
+        transform: scale(1.03);
+        box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.25);
+    }
+`;
+
 const getButtonStyles = props => {
     switch(props.buttonStyle) {
         case 'sign-main': return signMain;
@@ -75,6 +91,7 @@ const getButtonStyles = props => {
         case 'task-done': return taskDone;
         case 'task-remove': return taskRemove;
         case 'task-add': return taskAdd;
+        case 'settings': return settings;
         default: return;
     }
 };

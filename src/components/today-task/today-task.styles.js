@@ -5,14 +5,15 @@ export const TaskContainer = styled.li`
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
-    width: auto;
-    min-width: 420px;
-    min-height: 180px;
+    min-width: 400px;
+    width: 400px;
+    height: 170px;
     font-size: 1.2rem;
     background-color: #F1F1F1;
     box-shadow: 0px 3px 10px rgba(4, 4, 4, 0.3);
     border-radius: 12px;
-    margin-bottom: 50px;
+    margin-bottom: 65px;
+    margin-right: 70px;
     opacity: ${props => props.completed ? '0.8' : '1'};
     span {
         margin-left: 20px;
@@ -45,7 +46,7 @@ export const TaskInfo = styled.div`
     p {
         max-height: 22px;
         max-width: 350px;
-        font-size: 1.3rem;
+        font-size: 1.25rem;
         letter-spacing: 0.03em;
         padding: 0;
         margin: 0;
@@ -58,10 +59,11 @@ export const TaskInfo = styled.div`
 `;
 
 export const EditTitle = styled.input`
-    width: 180px;
+    width: 240px;
     height: 25px;
-    border: 1px solid #000000;
-    background-color: #F1F1F1;
+    border: none;
+    border-bottom: 1px solid #F1F1F1;
+    background-color: ${props => props.color};
     font-size: 1.15rem;
     font-weight: 500;
     color: #000000;

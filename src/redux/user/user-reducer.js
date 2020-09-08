@@ -11,11 +11,14 @@ const userReducer = (state = INITIAL_STATE, action) => {
     switch(action.type) {
         case UserActionTypes.SIGN_IN_START:
         case UserActionTypes.SIGN_UP_START:
+        case UserActionTypes.UPDATE_USER_START:
+        case UserActionTypes.DELETE_ACCOUNT_START:
             return {
                 ...state,
                 isProcessing: true
             };
         case UserActionTypes.SIGN_UP_SUCCESS:
+        case UserActionTypes.UPDATE_USER_SUCCESS:
             return {
                 ...state,
                 isProcessing: false
@@ -34,9 +37,18 @@ const userReducer = (state = INITIAL_STATE, action) => {
                 authToken: null,
                 error: null
             };
+        case UserActionTypes.DELETE_ACCOUNT_SUCCESS:
+            return {
+                isProcessing: false,
+                userData: null,
+                authToken: null,
+                error: null
+            };
         case UserActionTypes.SIGN_IN_FAILURE:
         case UserActionTypes.SIGN_OUT_FAILURE:
         case UserActionTypes.SIGN_UP_FAILURE:
+        case UserActionTypes.UPDATE_USER_FAILURE:
+        case UserActionTypes.DELETE_ACCOUNT_FAILURE:
             return {
                 ...state,
                 isProcessing: false,

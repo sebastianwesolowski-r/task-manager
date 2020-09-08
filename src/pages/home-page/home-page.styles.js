@@ -4,11 +4,11 @@ export const HomePageContainer = styled.div`
     width: 100%;
     height: 100vh;
     overflow: hidden;
+    padding-left: 180px;
 `;
 
 export const TasksHeader = styled.div`
     position: relative;
-    margin-left: 180px;
     top: 60px;
     font-size: 2rem;
     font-weight: 500;
@@ -24,18 +24,16 @@ export const TasksHeader = styled.div`
 
 export const TasksContainer = styled.ul`
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 470px;
-    height: calc(100% - 183px);
+    flex-wrap: wrap;
+    width: calc(100% - 180px);
+    max-height: calc(100% - 183px);
     position: relative;
-    margin-left: 180px;
     top: 100px;
     padding: 0;
     padding-top: 10px;
     padding-left: 10px;
-    overflow-y: auto;
     overflow-x: none;
+    overflow-y: auto;
     &::-webkit-scrollbar {
         width: 9px;
     }

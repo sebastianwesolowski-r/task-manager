@@ -34,7 +34,7 @@ const AddTask = ({showTaskPopup, token, addTask}) => {
             <AddTaskContainer>
                 <AddTaskHeader>CREATE NEW TASK</AddTaskHeader>
                 <form onSubmit={handleSubmit}>
-                    <FormInput type="text" name="title" value={title} placeholder="Title" onChange={handleChange} maxlength="33" required/>
+                    <FormInput type="text" name="title" value={title} placeholder="Title" onChange={handleChange} maxLength="33" required/>
                     <FormInput type="time" name="time" value={time} onChange={handleChange} required/>
                     <FormInput type="date" name="date" value={date} style={{marginBottom: '40px'}} onChange={handleChange} required/>
                     <ColorContainer>
@@ -44,7 +44,7 @@ const AddTask = ({showTaskPopup, token, addTask}) => {
                         <ColorBox color="#00B32B" taskColor={taskColor} onClick={() => setTaskColor("#00B32B")}/>
                         <ColorBox color="#58BABA" taskColor={taskColor} onClick={() => setTaskColor("#58BABA")}/>
                     </ColorContainer>
-                    <CustomButton buttonStyle="task-add">Submit</CustomButton>
+                    <CustomButton type="submit" buttonStyle="task-add">Submit</CustomButton>
                 </form>
             </AddTaskContainer>
             <Overlay onClick={() => showTaskPopup()} />

@@ -15,9 +15,7 @@ const SignIn = ({setSignMethod, signInStart}) => {
     const [userCredentials, setUserCredentials] = useState({email: '', password: ''});
     const [passwordShown, setPasswordShown] = useState(false);
     const {email, password} = userCredentials;
-    const togglePasswordVisiblity = () => {
-        setPasswordShown(!passwordShown);
-    };
+    const togglePasswordVisiblity = () => setPasswordShown(!passwordShown);
 
     const handleChange = e => {
         const {value, name} = e.target;

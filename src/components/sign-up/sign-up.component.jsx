@@ -15,10 +15,8 @@ const SignUp = ({setSignMethod, signUpStart}) => {
     const [userCredentials, setUserCredentials] = useState({email: '', password: '', confirmPassword: ''});
     const [passwordShown, setPasswordShown] = useState(false);
     const {email, password, confirmPassword} = userCredentials;
-    const togglePasswordVisiblity = () => {
-        setPasswordShown(!passwordShown);
-    };
-    
+    const togglePasswordVisiblity = () => setPasswordShown(!passwordShown);
+
     const handleChange = e => {
         const {value, name} = e.target;
         setUserCredentials({...userCredentials, [name]: value});

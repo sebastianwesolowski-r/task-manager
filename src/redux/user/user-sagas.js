@@ -2,10 +2,10 @@ import {takeLatest, put, all, call} from 'redux-saga/effects';
 
 import UserActionTypes from './user-types';
 
-import {signInSuccess, signInFailure, signOutSuccess, signOutFailure, signUpSuccess, signUpFailure} from './user-actions';
+import {signInSuccess, signInFailure, signOutStart, signOutSuccess, signOutFailure, signUpSuccess, signUpFailure, updateUserSuccess, updateUserFailure, deleteAccountSuccess, deleteAccountFailure} from './user-actions';
 import {getTasksStart} from '../tasks/tasks-actions';
 
-import {callCreateUser, callLoginUser, callLogoutUser} from '../../api/api';
+import {callCreateUser, callLoginUser, callLogoutUser, callUpdateUser, callDeleteAccount} from '../../api/api';
 
 export function* signIn({payload: {email, password}}) {
     try {
@@ -35,6 +35,25 @@ export function* signUp({payload: {email, password}}) {
     }
 };
 
+export function* updateUser({payload: {authToken, updateData}}) {
+    try {
+        yield callUpdateUser(authToken, updateData);
+        yield put(updateUserSuccess());
+        yield put(signOutStart(authToken));
+    } catch (e) {
+        yield put(updateUserFailure(e));
+    }
+};
+
+export function* deleteAccount({payload}) {
+    try {
+        yield callDeleteAccount(payload);
+        yield put(deleteAccountSuccess());
+    } catch (e) {
+        yield put(deleteAccountFailure(e));
+    }
+};
+
 export function* onSignInStart() {
     yield takeLatest(UserActionTypes.SIGN_IN_START, signIn);
 };
@@ -47,6 +66,14 @@ export function* onSignUpStart() {
     yield takeLatest(UserActionTypes.SIGN_UP_START, signUp);
 };
 
+export function* onUpdateUserStart() {
+    yield takeLatest(UserActionTypes.UPDATE_USER_START, updateUser);
+};
+
+export function* onDeleteAccount() {
+    yield takeLatest(UserActionTypes.DELETE_ACCOUNT_START, deleteAccount);
+}
+
 export function* userSagas() {
-    yield all([call(onSignUpStart), call(onSignInStart), call(onSignOutStart)]);
+    yield all([call(onSignUpStart), call(onSignInStart), call(onSignOutStart), call(onUpdateUserStart), call(onDeleteAccount)]);
 };

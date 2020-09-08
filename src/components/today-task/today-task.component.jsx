@@ -45,7 +45,7 @@ const TodayTask = ({task: {_id, title, deadline, completed, color}, token, updat
         <TaskContainer completed={completed}>
             <TaskHeader color={color}>
                 <TaskInfo>
-                    <p>Task {taskEdit ? <EditTitle type="text" onChange={handleChange} maxlength="33" /> : title}</p>
+                    <p>Task {taskEdit ? <EditTitle color={color} type="text" onChange={handleChange} maxLength="33" /> : title}</p>
                     <p>{taskDate.getHours()} : {getTaskDateMinutes()}</p>
                 </TaskInfo>
                 {
