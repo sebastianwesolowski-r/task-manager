@@ -11,7 +11,7 @@ export const MenuContainer = styled.div`
     word-wrap: normal;
     padding-top: 30px;
     padding-bottom: 40px;
-    background-color: #FF8246;
+    background-color: ${props => props.theme.mainColor};
     position: absolute;
     left: 0;
     top: 0;
@@ -42,7 +42,7 @@ export const NavigationItem = styled(Link)`
     justify-content: center;
     width: 50px;
     height: 50px;
-    ${props => props.isactive ? 'background-color: #F1F1F1' : ''};
+    background-color: ${props => props.isactive ? props.theme.customWhite : ''};
     border-radius: 15px;
     cursor: pointer;
     transition-duration: 200ms;

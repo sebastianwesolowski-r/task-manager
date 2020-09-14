@@ -4,10 +4,9 @@ const signMain = css`
     width: 180px;
     height: 35px;
     font-size: 1.15rem;
-    background-color: #FF8246;
+    background-color: ${props => props.theme.mainColor};;
     border: none;
     border-radius: 10px;
-    margin-top: 25px;
     margin-bottom: 20px;
     &:hover {
         transform: scale(1.05);
@@ -19,12 +18,12 @@ const signSecondary = css`
     width: 180px;
     height: 35px;
     font-size: 1rem;
-    background-color: #F1F1F1;
-    border: 2px solid #FF8246;
+    background-color: ${props => props.theme.customWhite};
+    border: 2px solid ${props => props.theme.mainColor};
     border-radius: 10px;
     &:hover {
         transform: scale(1.05);
-        background-color: #FF8246;
+        background-color: ${props => props.theme.mainColor};
         color: #FFFFFF;
         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     }
@@ -45,6 +44,32 @@ const taskDone = css`
     }
 `;
 
+const taskAdd = css`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 65px;
+    height: 65px;
+    position: absolute;
+    right: 40px;
+    bottom: 40px;
+    font-size: 3.1rem;
+    font-weight: 500;
+    background-color: ${props => props.theme.mainColor};
+    margin: 0;
+    border: none;
+    border-radius: 10px;
+    &:hover {
+        opacity: 0.9;
+    }
+    &:active {
+        svg {
+            transition-duration: 250ms;
+            transform: scale(1.2);
+        }
+    }
+`;
+
 const taskRemove = css`
     width: 115px;
     height: 35px;
@@ -55,11 +80,11 @@ const taskRemove = css`
     border: none;
 `;
 
-const taskAdd = css`
+const taskSubmit = css`
     width: 180px;
     height: 35px;
     font-size: 1.15rem;
-    background-color: #FF8246;
+    background-color: ${props => props.theme.mainColor};
     border: none;
     border-radius: 10px;
     &:hover {
@@ -76,7 +101,7 @@ const settings = css`
     background-color: #D3D3D3;
     border: none;
     border-radius: 8px;
-    margin-bottom: 25px;
+    margin-top: auto;
     padding: 0 25px;
     &:hover {
         transform: scale(1.03);
@@ -89,8 +114,9 @@ const getButtonStyles = props => {
         case 'sign-main': return signMain;
         case 'sign-secondary': return signSecondary;
         case 'task-done': return taskDone;
-        case 'task-remove': return taskRemove;
         case 'task-add': return taskAdd;
+        case 'task-remove': return taskRemove;
+        case 'task-submit': return taskSubmit;
         case 'settings': return settings;
         default: return;
     }
@@ -100,5 +126,8 @@ export const CustomButtonContainer = styled.button`
     outline: none;
     cursor: pointer;
     transition-duration: 200ms;
+    &:disabled {
+        filter: brightness(0.85);
+    }
     ${getButtonStyles};
 `

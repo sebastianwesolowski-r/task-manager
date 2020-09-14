@@ -8,11 +8,15 @@ import {ReactComponent as Submit} from '../../assets/submit.svg';
 import {TaskContainer, TaskHeader, TaskInfo, EditTitle} from './today-task.styles';
 
 import CustomButton from '../custom-button/custom-button.component';
+import Spinner from '../spinner/spinner.component';
+
+import {add0ToNumber} from '../../utils/utils';
 
 import {selectAuthToken} from '../../redux/user/user-selectors';
 import {updateTaskStart, deleteTaskStart} from '../../redux/tasks/tasks-actions';
+import {selectDeletingProcess, selectUpdatingProcess} from '../../redux/tasks/tasks-selectors';
 
-const TodayTask = ({task: {_id, title, deadline, completed, color}, token, updateTask, deleteTask}) => {
+const TodayTask = ({task: {_id, title, deadline, completed, color}, token, updateTask, deleteTask, deletingProcess, updatingProcess}) => {
 
     const [taskEdit, setTaskEdit] = useState(false);
     const [editedTitle, setEditedTitle] = useState('');
@@ -33,24 +37,17 @@ const TodayTask = ({task: {_id, title, deadline, completed, color}, token, updat
     }
 
     const taskDate = new Date(deadline);
-    const getTaskDateMinutes = () => {
-        let minutes = taskDate.getMinutes();
-        if(minutes < 10) {
-            return `0${minutes}`;
-        }
-        return minutes;
-    }
 
     return (
         <TaskContainer completed={completed}>
             <TaskHeader color={color}>
                 <TaskInfo>
                     <p>Task {taskEdit ? <EditTitle color={color} type="text" onChange={handleChange} maxLength="33" /> : title}</p>
-                    <p>{taskDate.getHours()} : {getTaskDateMinutes()}</p>
+                    <p>{taskDate.getHours()} : {add0ToNumber(taskDate.getMinutes())}</p>
                 </TaskInfo>
                 {
                     completed ? null : (
-                        taskEdit ? <Submit onClick={() => updateTaskTitle()} /> : <Edit onClick={() => setTaskEdit(!taskEdit)} />
+                        taskEdit ? updatingProcess ? <Spinner /> : <Submit onClick={() => updateTaskTitle()} /> : <Edit onClick={() => setTaskEdit(!taskEdit)} />
                     )
                 }
             </TaskHeader>
@@ -59,14 +56,16 @@ const TodayTask = ({task: {_id, title, deadline, completed, color}, token, updat
                 {
                     completed ? null : <CustomButton buttonStyle="task-done" color={color} onClick={() => updateTask(token, _id, {completed: true})}>Done</CustomButton>
                 }
-                <CustomButton buttonStyle="task-remove" color={color} onClick={() => deleteTask(token, _id)}>Remove</CustomButton>
+                <CustomButton buttonStyle="task-remove" color={color} onClick={() => deleteTask(token, _id)} disabled={deletingProcess ? true : false}>{deletingProcess ? <Spinner /> : "Remove"}</CustomButton>
             </div>
         </TaskContainer>
     );
 };
 
 const mapStateToProps = createStructuredSelector({
-    token: selectAuthToken
+    token: selectAuthToken,
+    deletingProcess: selectDeletingProcess,
+    updatingProcess: selectUpdatingProcess
 });
 
 const mapDispatchToProps = dispatch => ({

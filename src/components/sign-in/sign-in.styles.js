@@ -15,7 +15,7 @@ export const SignInContainer = styled.div`
     align-items: center;
     width: 450px;
     height: 500px;
-    background-color: #F1F1F1;
+    background-color: ${props => props.theme.customWhite};
     border-radius: 8px;
     box-shadow: 1px 3px 15px 1px rgba(4, 4, 4, 0.35);
     animation: ${show} 300ms ease;
@@ -48,8 +48,19 @@ export const SignInHeader = styled.div`
     font-size: 1.6rem;
     font-weight: 500;
     letter-spacing: 0.05em;
-    background-color: #FF8246;
+    background-color: ${props => props.theme.mainColor};
     border-radius: 8px 8px 0 0;
     margin-bottom: 80px;
     text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+`;
+
+export const SignError = styled.div`
+    width: 100%;
+    height: 25px;
+    font-size: 1rem;
+    font-weight: 500;
+    word-wrap: break-word;
+    text-align: center;
+    color: #E20E0E;
+    margin-bottom: 20px;
 `;

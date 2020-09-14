@@ -4,20 +4,21 @@ import {createStructuredSelector} from 'reselect';
 
 import {ReactComponent as Plus} from '../../assets/plus.svg';
 
-import {HomePageContainer, TasksHeader, TasksContainer, AddTaskButton} from './home-page.styles';
+import {HomePageContainer, TasksHeader, TasksContainer, LoadingOverlay} from './home-page.styles';
 
 import TodayTask from '../../components/today-task/today-task.component';
+import CustomButton from '../../components/custom-button/custom-button.component';
 import AddTask from '../../components/add-task/add-task.component';
+import Spinner from '../../components/spinner/spinner.component';
 
-import {selectTodayTasks} from '../../redux/tasks/tasks-selectors';
+import {selectTodayTasks, selectFetchingProcess} from '../../redux/tasks/tasks-selectors';
 
-const HomePage = ({todayTasks}) => {
+const HomePage = ({todayTasks, fetchingProcess}) => {
 
     const [taskPopup, setTaskPopup] = useState(false);
 
     const showTaskPopup = () => setTaskPopup(!taskPopup);
 
-    console.log(todayTasks);
     return (
         <>
             <HomePageContainer>
@@ -34,11 +35,18 @@ const HomePage = ({todayTasks}) => {
                 <TasksContainer>
                     {todayTasks.sort(({deadline: previousDeadline}, {deadline: currentDeadline}) => new Date(previousDeadline) - new Date(currentDeadline)).map(task => <TodayTask key={task._id} task={task} />)}
                 </TasksContainer>
-                <AddTaskButton onClick={() => showTaskPopup()}><Plus /></AddTaskButton>
+                <CustomButton buttonStyle="task-add" onClick={() => showTaskPopup()}><Plus /></CustomButton>
             </HomePageContainer>
             {
                 taskPopup ? (
                     <AddTask showTaskPopup={showTaskPopup} />
+                ) : null
+            }
+            {
+                fetchingProcess ? (
+                    <LoadingOverlay>
+                        <Spinner bigger/>
+                    </LoadingOverlay>
                 ) : null
             }
         </>
@@ -46,7 +54,8 @@ const HomePage = ({todayTasks}) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-    todayTasks: selectTodayTasks
+    todayTasks: selectTodayTasks,
+    fetchingProcess: selectFetchingProcess
 });
 
 export default connect(mapStateToProps)(HomePage);

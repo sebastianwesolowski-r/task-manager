@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {createStructuredSelector} from 'reselect';
-import {Switch} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 
 import GlobalStyle from './styles/global-style';
 
@@ -9,6 +9,7 @@ import LandingPage from './pages/landing-page/landing-page.component';
 import HomePage from './pages/home-page/home-page.component';
 import CalendarPage from './pages/calendar-page/calendar-page.component';
 import SettingsPage from './pages/settings-page/settings-page.component';
+import NotFoundPage from './pages/not-found-page/not-found-page.component';
 
 import Menu from './components/menu/menu.component';
 
@@ -47,6 +48,7 @@ const App = ({auth}) => {
           component={SettingsPage}
           appProps={{auth}}
         />
+        <Route component={NotFoundPage} />
       </Switch>
     </>
   );

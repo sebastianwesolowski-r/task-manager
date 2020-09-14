@@ -25,7 +25,7 @@ export const TasksHeader = styled.div`
 export const TasksContainer = styled.ul`
     display: flex;
     flex-wrap: wrap;
-    width: calc(100% - 180px);
+    width: 100%;
     max-height: calc(100% - 183px);
     position: relative;
     top: 100px;
@@ -42,36 +42,18 @@ export const TasksContainer = styled.ul`
         box-shadow: inset 0 0 5px #D3D3D3;
     }
     &::-webkit-scrollbar-thumb {
-        background: #FF8246;
+        background: ${props => props.theme.mainColor};
         border-radius: 0 0 10px 10px;
       }
 `;
 
-export const AddTaskButton = styled.button`
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 65px;
-      height: 65px;
-      position: absolute;
-      right: 40px;
-      bottom: 40px;
-      font-size: 3.1rem;
-      font-weight: 500;
-      background-color: #FF8246;
-      margin: 0;
-      border: none;
-      border-radius: 10px;
-      outline: none;
-      cursor: pointer;
-      transition-duration: 150ms;
-      &:hover {
-          opacity: 0.9;
-      }
-      &:active {
-          svg {
-              transition-duration: 250ms;
-              transform: scale(1.2);
-          }
-      }
+export const LoadingOverlay = styled.div`
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(2px);
 `;

@@ -5,19 +5,19 @@ import {createStructuredSelector} from 'reselect';
 import {ReactComponent as PasswordVisible} from '../../assets/password-visible.svg';
 import {ReactComponent as PasswordNotVisible} from '../../assets/password-not-visible.svg';
 
-import {SettingsPageContainer, SettingsHeader, SettingsButtons, PasswordMessage} from './settings-page.styles';
+import {SettingsPageContainer, SettingsHeader, PasswordMessage, DeleteAccountMessage} from './settings-page.styles';
 
 import CustomButton from '../../components/custom-button/custom-button.component';
 import FormInput from '../../components/form-input/form-input.component';
 
 import {updateUserStart, deleteAccountStart} from '../../redux/user/user-actions';
-import {selectAuthToken} from '../../redux/user/user-selectors';
+import {selectUpdateUserError, selectDeleteUserError} from '../../redux/user/user-selectors';
 
-const SettingsPage = ({token, updateUser, deleteUser}) => {
-
+const SettingsPage = ({auth, updateUser, deleteUser, updateError, deleteError}) => {
     const messages = {
-        default : "After changing password you must re-authenticate",
-        error: "Passwords didn't match"
+        default : "After changing password you must re-authenticate.",
+        passwordsError: "Passwords didn't match.",
+        authError: "Something went wrong. Please re-authenticate."
     };
     const [passwordMessage, setPasswordMessage] = useState(messages.default);
     const [passwordData, setPasswordData] = useState({password: '', confirmPassword: ''});
@@ -36,11 +36,11 @@ const SettingsPage = ({token, updateUser, deleteUser}) => {
     const handleSubmit = async e => {
         e.preventDefault();
         if(password !== confirmPassword) {
-            setPasswordMessage(messages.error);
+            setPasswordMessage(messages.passwordsError);
             return;
         }
         setPasswordMessage(messages.default);
-        await updateUser(token, {password});
+        await updateUser(auth, {password});
     };
 
     return (
@@ -54,20 +54,20 @@ const SettingsPage = ({token, updateUser, deleteUser}) => {
                 <FormInput type={passwordShown ? 'text' : 'password'} name="confirmPassword" value={confirmPassword} placeholder="Confirm New Password" onChange={handleChange} style={{marginBottom: '20px'}} />
                 {
                     password.length > 0 ? (
-                        <PasswordMessage>{passwordMessage}</PasswordMessage>
+                        <PasswordMessage>{updateError ? messages.authError : passwordMessage}</PasswordMessage>
                     ) : null
                 }
-                <CustomButton type="submit" buttonStyle="task-add" style={{marginTop: '20px'}}>submit</CustomButton>
+                <CustomButton type="submit" buttonStyle="task-submit" style={{marginTop: '20px'}}>submit</CustomButton>
             </form>
-            <SettingsButtons>
-                <CustomButton buttonStyle="settings" onClick={() => deleteUser(token)}>Delete account</CustomButton>
-            </SettingsButtons>
+            <CustomButton buttonStyle="settings" onClick={() => deleteUser(auth)}>Delete account</CustomButton>
+            <DeleteAccountMessage>{deleteError ? messages.authError : null}</DeleteAccountMessage>
         </SettingsPageContainer>
     );
 };
 
 const mapStateToProps = createStructuredSelector({
-    token: selectAuthToken
+    updateError: selectUpdateUserError,
+    deleteError: selectDeleteUserError
 });
 
 const mapDispatchToProps = dispatch => ({

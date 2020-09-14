@@ -43,6 +43,6 @@ export const Sign = styled.div`
     span {
         font-family: 'Righteous', cursive;
         font-size: 1.25rem;
-        color: #FF8246;
+        color: ${props => props.theme.mainColor};
     }
 `;

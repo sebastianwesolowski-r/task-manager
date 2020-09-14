@@ -7,15 +7,21 @@ import {AddTaskContainer, AddTaskHeader, ColorContainer, ColorBox} from './add-t
 import FormInput from '../form-input/form-input.component';
 import Overlay from '../overlay/overlay.component';
 import CustomButton from '../custom-button/custom-button.component';
+import Spinner from '../spinner/spinner.component';
 
 import {selectAuthToken} from '../../redux/user/user-selectors';
 import {addTaskStart} from '../../redux/tasks/tasks-actions';
+import {selectAddingProcess} from '../../redux/tasks/tasks-selectors';
 
-const AddTask = ({showTaskPopup, token, addTask}) => {
+import {add0ToNumber} from '../../utils/utils';
 
-    const [taskData, setTaskData] = useState({title: '', time: '', date: ''});
+const AddTask = ({showTaskPopup, token, addTask, defaultDate, addingProcess}) => {
+
+    const [taskData, setTaskData] = useState({title: '', time: '', date: defaultDate});
     const {title, time, date} = taskData;
     const [taskColor, setTaskColor] = useState("#7E5398");
+
+    const currentDate = `${new Date().getFullYear()}-${add0ToNumber(new Date().getMonth() + 1)}-${new Date().getDate()}`;
 
     const handleChange = e => {
         const {value, name} = e.target;
@@ -36,7 +42,7 @@ const AddTask = ({showTaskPopup, token, addTask}) => {
                 <form onSubmit={handleSubmit}>
                     <FormInput type="text" name="title" value={title} placeholder="Title" onChange={handleChange} maxLength="33" required/>
                     <FormInput type="time" name="time" value={time} onChange={handleChange} required/>
-                    <FormInput type="date" name="date" value={date} style={{marginBottom: '40px'}} onChange={handleChange} required/>
+                    <FormInput type="date" name="date" value={date} style={{marginBottom: '40px'}} onChange={handleChange} defaultValue={currentDate} min={currentDate} required/>
                     <ColorContainer>
                         <ColorBox color="#7E5398" taskColor={taskColor} onClick={() => setTaskColor("#7E5398")}/>
                         <ColorBox color="#C5458C" taskColor={taskColor} onClick={() => setTaskColor("#C5458C")}/>
@@ -44,7 +50,7 @@ const AddTask = ({showTaskPopup, token, addTask}) => {
                         <ColorBox color="#00B32B" taskColor={taskColor} onClick={() => setTaskColor("#00B32B")}/>
                         <ColorBox color="#58BABA" taskColor={taskColor} onClick={() => setTaskColor("#58BABA")}/>
                     </ColorContainer>
-                    <CustomButton type="submit" buttonStyle="task-add">Submit</CustomButton>
+                    <CustomButton type="submit" buttonStyle="task-submit" disabled={addingProcess ? true : false}>{addingProcess ? <Spinner /> : "Submit"}</CustomButton>
                 </form>
             </AddTaskContainer>
             <Overlay onClick={() => showTaskPopup()} />
@@ -53,7 +59,8 @@ const AddTask = ({showTaskPopup, token, addTask}) => {
 };
 
 const mapStateToProps = createStructuredSelector({
-    token: selectAuthToken
+    token: selectAuthToken,
+    addingProcess: selectAddingProcess
 });
 
 const mapDispatchToProps = dispatch => ({

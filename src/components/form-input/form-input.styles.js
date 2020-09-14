@@ -20,6 +20,6 @@ export const FormInputContainer = styled.input`
         }
     }
     &:focus {
-        border-bottom: 1px solid #000000;
+        border-bottom: 1px solid ${props => props.theme.customBlack};;
     }
 `;

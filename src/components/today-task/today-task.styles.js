@@ -9,7 +9,7 @@ export const TaskContainer = styled.li`
     width: 400px;
     height: 170px;
     font-size: 1.2rem;
-    background-color: #F1F1F1;
+    background-color: ${props => props.theme.customWhite};
     box-shadow: 0px 3px 10px rgba(4, 4, 4, 0.3);
     border-radius: 12px;
     margin-bottom: 65px;
@@ -62,10 +62,10 @@ export const EditTitle = styled.input`
     width: 240px;
     height: 25px;
     border: none;
-    border-bottom: 1px solid #F1F1F1;
+    border-bottom: 1px solid ${props => props.theme.customWhite};;
     background-color: ${props => props.color};
     font-size: 1.15rem;
     font-weight: 500;
-    color: #000000;
+    color: ${props => props.theme.customBlack};
     outline: none;
 `;

@@ -36,17 +36,19 @@ export const SettingsHeader = styled.p`
     margin-bottom: 80px;
 `;
 
-export const SettingsButtons = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-top: auto;
-`;
-
 export const PasswordMessage = styled.p`
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 500;
     word-wrap: break-word;
     margin: 0;
+    padding: 0;
+`;
+
+export const DeleteAccountMessage = styled.p`
+    height: 20px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #E20E0E;
+    margin-bottom: 30px;
     padding: 0;
 `;

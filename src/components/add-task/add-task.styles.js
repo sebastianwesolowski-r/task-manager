@@ -25,7 +25,7 @@ export const AddTaskContainer = styled.div`
     margin: 0 auto;
     margin-top: 150px;
     z-index: 100;
-    background-color: #F1F1F1;
+    background-color: ${props => props.theme.customWhite};
     box-shadow: 1px 2px 15px 1px rgba(4, 4, 4, 0.3);
     border-radius: 8px;
     animation: ${show} 150ms ease-in;
@@ -44,7 +44,7 @@ export const AddTaskHeader = styled.div`
     height: 60px;
     font-size: 1.3rem;
     font-weight: 500;
-    background-color: #FF8246;
+    background-color: ${props => props.theme.mainColor};;
     border-radius: 8px 8px 0 0;
     margin-bottom: 60px;
     text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);

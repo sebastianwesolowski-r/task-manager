@@ -4,11 +4,11 @@ import userReducer from './user/user-reducer';
 import tasksReducer from './tasks/tasks-reducer';
 
 import {persistReducer} from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import storageSession from 'redux-persist/lib/storage/session'
 
 const reduxPersistConfig = {
     key: 'root',
-    storage,
+    storage: storageSession,
     whiteList: ['user']
 };
 

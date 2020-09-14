@@ -4,7 +4,7 @@ const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
     font-family: 'Asap', sans-serif;
-    color: #14181B;
+    color: ${props => props.theme.customBlack};
     user-select: none;
   }
   html, body {
@@ -14,7 +14,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
     padding: 0;
-    background-color: #F1F1F1;
+    background-color: ${props => props.theme.customWhite};
   }
 `;
 
