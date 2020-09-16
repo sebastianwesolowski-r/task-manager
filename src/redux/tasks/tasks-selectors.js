@@ -9,7 +9,12 @@ export const selectUserTasks = createSelector(
 
 export const selectTodayTasks = createSelector(
     [selectUserTasks],
-    tasks => tasks.filter(task => new Date(task.deadline).getDate() === new Date().getDate())
+    tasks => tasks.filter(task => new Date(task.deadline).getFullYear() === new Date().getFullYear() && new Date(task.deadline).getMonth() === new Date().getMonth() && new Date(task.deadline).getDate() === new Date().getDate())
+);
+
+export const selectError = createSelector(
+    [selectTasks],
+    tasks => tasks.error
 );
 
 export const selectIsProcessing = createSelector(

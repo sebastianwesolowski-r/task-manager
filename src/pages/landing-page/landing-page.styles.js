@@ -15,19 +15,21 @@ export const Splash = styled.div`
     align-items: flex-start;
     height: 65%;
     max-height: 650px;
-    width: 45%;
-    max-width: 700px;
+    width: 50%;
+    max-width: 750px;
     font-weight: 500;
     p {
         font-size: 2.8rem;
+        font-family: 'Righteous', cursive;
         letter-spacing: 0.05em;
         margin: 0;
         padding-left: 50px;
         margin-bottom: 15px;
     }
     span {
-        font-size: 1.25rem;
-        letter-spacing: 0.03em;
+        font-size: 1.3rem;
+        font-family: 'Righteous', cursive;
+        letter-spacing: 0.02em;
         padding-left: 50px;
         margin-bottom: 40px;
     }

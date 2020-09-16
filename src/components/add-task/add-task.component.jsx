@@ -16,12 +16,11 @@ import {selectAddingProcess} from '../../redux/tasks/tasks-selectors';
 import {add0ToNumber} from '../../utils/utils';
 
 const AddTask = ({showTaskPopup, token, addTask, defaultDate, addingProcess}) => {
-
-    const [taskData, setTaskData] = useState({title: '', time: '', date: defaultDate});
+    const currentDate = `${new Date().getFullYear()}-${add0ToNumber(new Date().getMonth() + 1)}-${new Date().getDate()}`;
+    const fixedDefaultDate = `${new Date(defaultDate).getFullYear()}-${add0ToNumber(new Date(defaultDate).getMonth() + 2)}-${new Date(defaultDate).getDate()}`;
+    const [taskData, setTaskData] = useState({title: '', time: '', date: defaultDate ? fixedDefaultDate : currentDate});
     const {title, time, date} = taskData;
     const [taskColor, setTaskColor] = useState("#7E5398");
-
-    const currentDate = `${new Date().getFullYear()}-${add0ToNumber(new Date().getMonth() + 1)}-${new Date().getDate()}`;
 
     const handleChange = e => {
         const {value, name} = e.target;
@@ -42,7 +41,7 @@ const AddTask = ({showTaskPopup, token, addTask, defaultDate, addingProcess}) =>
                 <form onSubmit={handleSubmit}>
                     <FormInput type="text" name="title" value={title} placeholder="Title" onChange={handleChange} maxLength="33" required/>
                     <FormInput type="time" name="time" value={time} onChange={handleChange} required/>
-                    <FormInput type="date" name="date" value={date} style={{marginBottom: '40px'}} onChange={handleChange} defaultValue={currentDate} min={currentDate} required/>
+                    <FormInput type="date" name="date" value={date} style={{marginBottom: '40px'}} onChange={handleChange} min={currentDate} required/>
                     <ColorContainer>
                         <ColorBox color="#7E5398" taskColor={taskColor} onClick={() => setTaskColor("#7E5398")}/>
                         <ColorBox color="#C5458C" taskColor={taskColor} onClick={() => setTaskColor("#C5458C")}/>

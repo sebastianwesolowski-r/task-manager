@@ -57,3 +57,16 @@ export const LoadingOverlay = styled.div`
     background: rgba(255, 255, 255, 0.45);
     backdrop-filter: blur(2px);
 `;
+
+export const TasksError = styled.div`
+    width: 450px;
+    height: 30px;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.3rem;
+    color: #E20E0E;
+`;

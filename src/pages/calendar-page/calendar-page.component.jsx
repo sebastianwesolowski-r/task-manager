@@ -32,7 +32,7 @@ const CalendarPage = ({userTasks}) => {
 
     useEffect(() => {
         selectTasksForDay();
-    }, [pickedDay])
+    }, [userTasks, pickedDay])
 
     const showTaskPopup = () => setTaskPopup(!taskPopup);
 
@@ -201,7 +201,6 @@ const CalendarPage = ({userTasks}) => {
                                         ))
                                     }
                                 </DaysContainer>
-                                {console.log(selectedTasks)}
                             </Calendar>
                         ) : null
                     }
@@ -215,7 +214,7 @@ const CalendarPage = ({userTasks}) => {
                                 {task.completed ? <Completed /> : <Pending />}
                                 <TaskData>
                                     <p>{task.title}</p>
-                                    <p>{task.deadline.substring(11,16)}</p>
+                                    <p>{new Date(task.deadline).getHours()} : {add0ToNumber(new Date(task.deadline).getMinutes())}</p>
                                 </TaskData>
                             </Task>)}
                         </TasksContainer>

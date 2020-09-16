@@ -187,6 +187,7 @@ export const TasksContainer = styled.ul`
     width: 100%;
     margin-top: 20px;
     padding: 0;
+    padding-top: 15px;
     overflow-x: none;
     overflow-y: auto;
     &::-webkit-scrollbar {
