@@ -5,8 +5,11 @@ export const NotFoundPageContainer = styled.div`
     flex-direction: column;
     align-items: center;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     padding-top: 300px;
+    @media (max-width: 800px) {
+        padding-top: 220px;
+    }
 `;
 
 export const AppName = styled.p`
@@ -30,4 +33,8 @@ export const Message = styled.p`
     font-weight: 500;
     letter-spacing: 0.05em;
     margin-bottom: 40px;
+    @media (max-width: 800px) {
+        font-size: 1.2rem;
+        text-align: center;
+    }
 `;

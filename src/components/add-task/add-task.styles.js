@@ -34,6 +34,9 @@ export const AddTaskContainer = styled.div`
         flex-direction: column;
         align-items: center;
     }
+    @media (max-width: 800px) {
+       width: 95%;
+    }
 `;
 
 export const AddTaskHeader = styled.div`

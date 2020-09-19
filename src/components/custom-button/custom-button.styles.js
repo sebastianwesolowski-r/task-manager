@@ -68,6 +68,10 @@ const taskAdd = css`
             transform: scale(1.2);
         }
     }
+    @media (max-width: 800px) {
+        right: 20px;
+        bottom: 20px;
+    }
 `;
 
 const taskRemove = css`

@@ -7,7 +7,7 @@ const GlobalStyle = createGlobalStyle`
     color: ${props => props.theme.customBlack};
     user-select: none;
   }
-  html, body {
+  html, body, #root {
     width: 100%;
     height: 100%;
   }

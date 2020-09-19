@@ -5,7 +5,7 @@ export const SettingsPageContainer = styled.div`
     flex-direction: column;
     align-items: flex-start;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     overflow: hidden;
     padding-top: 100px;
     padding-left: 180px;
@@ -28,12 +28,20 @@ export const SettingsPageContainer = styled.div`
             }
         }
     }
+    @media (max-width: 800px) {
+        padding-top: 90px;
+        padding-left: 10px;
+    }
 `;
 
 export const SettingsHeader = styled.p`
     font-size: 1.9rem;
     font-weight: 600;
     margin-bottom: 80px;
+    @media (max-width: 800px) {
+        font-size: 1.6rem;
+        margin-bottom: 60px;
+    }
 `;
 
 export const PasswordMessage = styled.p`

@@ -18,6 +18,12 @@ export const TaskContainer = styled.li`
     span {
         margin-left: 20px;
     }
+    @media (max-width: 800px) {
+        min-width: 360px;
+        width: 360px;
+        height: 165px;
+        margin-bottom: 30px;
+    }
 `;
 
 export const TaskHeader = styled.div`
@@ -36,6 +42,9 @@ export const TaskHeader = styled.div`
         &:active {
             transform: scale(1.2);
         }
+    }
+    @media (max-width: 800px) {
+        height: 65px;
     }
 `;
 

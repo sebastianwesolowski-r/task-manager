@@ -6,7 +6,7 @@ import {ReactComponent as Plus} from '../../assets/plus.svg';
 import {ReactComponent as Pending} from '../../assets/pending.svg';
 import {ReactComponent as Completed} from '../../assets/completed.svg';
 
-import {CalendarPageContainer, MonthPicker, CalendarContainer, Calendar, Weekdays, DaysContainer, Day, TaskDots, Dot, CalendarTasksSection, DateHeader, TasksContainer, Task, TaskData} from './calendar-page.styles';
+import {CalendarPageContainer, MonthPicker, CalendarContainer, Calendar, Weekdays, DaysContainer, Day, TaskDots, Dot, CalendarTasksSection, CalendarTasksHeader, DateHeader, TasksContainer, Task, TaskData} from './calendar-page.styles';
 
 import {add0ToNumber} from '../../utils/utils';
 
@@ -208,7 +208,7 @@ const CalendarPage = ({userTasks}) => {
                         <DateHeader>
                             {pickedDay.substring(8, 10)} <span>{months[parseInt(pickedDay.substring(5,7))]}</span>
                         </DateHeader>
-                        <p style={{fontSize: "1.7rem", margin: "20px 0"}}>Tasks</p>
+                        <CalendarTasksHeader>Tasks</CalendarTasksHeader>
                         <TasksContainer>
                             {selectedTasks.sort(({deadline: previousDeadline}, {deadline: currentDeadline}) => new Date(previousDeadline) - new Date(currentDeadline)).map(task => <Task key={task._id}>
                                 {task.completed ? <Completed /> : <Pending />}

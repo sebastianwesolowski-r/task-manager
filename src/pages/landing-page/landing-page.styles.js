@@ -5,8 +5,14 @@ export const LandingPageContainer = styled.div`
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     padding: 0 100px;
+    @media (max-width: 800px) {
+        flex-direction: column;
+        justify-content: flex-start;
+        padding: 0;
+        overflow: hidden;
+    }
 `;
 
 export const Splash = styled.div`
@@ -33,6 +39,25 @@ export const Splash = styled.div`
         padding-left: 50px;
         margin-bottom: 40px;
     }
+    @media (max-width: 800px) {
+        width: 0;
+        height: 0;
+        p, span {
+            display: none;
+            margin: 0;
+            padding: 0;
+        }
+        svg {
+            width: 100%;
+            position: absolute;
+            z-index: 1;
+            top: 150px;
+            left: 0;
+            right: 150px;
+            margin: 0 auto;
+            opacity: 0.15;
+        }
+    }
 `;
 
 export const Sign = styled.div`
@@ -46,5 +71,16 @@ export const Sign = styled.div`
         font-family: 'Righteous', cursive;
         font-size: 1.25rem;
         color: ${props => props.theme.mainColor};
+    }
+    @media (max-width: 800px) {
+        width: 95%;
+        height: 580px;
+        position: relative;
+        z-index: 2;
+        margin: 0 auto;
+        margin-top: 100px;
+        span {
+            font-size: 1.8rem;
+        }
     }
 `;
